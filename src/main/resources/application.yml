@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: kafka-share-groups-poc
+  main:
+    web-application-type: none
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        linger.ms: 0
+    admin:
+      fail-fast: true
+poc:
+  role: ${POC_ROLE:consumer}
+  mode: ${POC_MODE:share}
+  worker-id: ${POC_WORKER_ID:local-worker}
+  delay-ms: ${POC_DELAY_MS:100}
+  auto-renew-locks: ${POC_AUTO_RENEW_LOCKS:false}
+  count: ${POC_COUNT:20}
+  start: ${POC_START:0}
+logging:
+  level:
+    org.apache.kafka: WARN
+    org.springframework.kafka: WARN
+    org.springframework.integration: WARN
